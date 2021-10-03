@@ -1,37 +1,27 @@
+const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+const ordinalSuffixes = ["th", "st", "nd", "rd"];
+const chars = [..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"];
+
 function formatBytes(bytes) {
-    if(bytes === 0) return '0 Bytes';
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
-    const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    return `${parseFloat(bytes / Math.pow(1024, i)).toFixed(2)}${sizes[i]}`
+    if (bytes < 1)
+        return "0B";
+    
+    const i = Math.floor(Math.log(bytes) / 6.931471805599453);
+    const f = parseFloat(bytes / Math.pow(1024, i)).toFixed(2);
+    return `${f % 1 === 0 ? Math.round(f) : f}${sizes[i]}`;
 }
 
-function toOrdinal(number) {
-    number = number.toString();
-    if (number.endsWith(11) || number.endsWith(12) || number.endsWith(13)) return number + 'th';
-    if (number.endsWith(1)) return number + 'st';
-    else if (number.endsWith(2)) return number + 'nd';
-    else if (number.endsWith(3)) return number + 'rd';
-    else return number + 'th';
+function toOrdinal(n) {
+    const v = n % 100;
+    return n + (ordinalSuffixes[(v - 20) % 10] || ordinalSuffixes[v] || ordinalSuffixes[0]);
 }
 
-function generateKey(len, an) {
-    an = an && an.toLowerCase();
-    var str = "",
-    i = 0,
-
-    min = an == "a" ? 10 : 0,
-    max = an == "n" ? 10 : 62;
-
-    for (; i++ < len;) {
-        var r = Math.random() * (max - min) + min << 0;
-            str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
-        }
+function generateKey(length) {
+    let str = "";
+    while (length-- != 0) str += chars[Math.floor(Math.random() * 62)];
     return str;
 }
 
-function toCapital(string) {
-    string.charAt(0).toUpperCase() + string.slice(1)
-}
+const toCapital = string => string[0].toUpperCase() + string.slice(1);
 
-
-module.exports = { formatBytes, toOrdinal, generateKey, toCapital }
+module.exports = { formatBytes, toOrdinal, generateKey, toCapital };
