@@ -1,5 +1,4 @@
 const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-const ordinalSuffixes = ["th", "st", "nd", "rd"];
 const chars = [..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"];
 
 function formatBytes(bytes) {
