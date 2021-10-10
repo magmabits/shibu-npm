@@ -12,7 +12,8 @@ function formatBytes(bytes) {
 }
 
 function toOrdinal(n) {
-  return n+["st","nd","rd"][n%10-1]||"th";
+    const v = n % 100;
+    return n + (ordinalSuffixes[(v - 20) % 10] || ordinalSuffixes[v] || ordinalSuffixes[0]);
 }
 
 function generateKey(length) {
