@@ -22,6 +22,6 @@ function generateKey(length) {
     return str;
 }
 
-const toCapital = string => string[0].toUpperCase() + string.slice(1);
+const toCapital = string => string.toLowerCase().replace(/\b\w/g, x => x.toUpperCase());
 
 module.exports = { formatBytes, toOrdinal, generateKey, toCapital };
