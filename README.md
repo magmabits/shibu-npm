@@ -1,7 +1,4 @@
-This is a npm package so that I can just use this instead of my normal files.
-It's lazy, ik but yeah.
-
-if you use this, why do you want to live in pain?
+## **THIS PACKAGE HAS BEEN ARCHIVED! PLEASE USE https://github.com/magmabits/ffeu**
 
 # Contents:
 
